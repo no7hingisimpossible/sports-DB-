@@ -1,15 +1,23 @@
 const loadAPI = () => {
     // console.log('clicked')
     document.getElementById('main-div').innerHTML = '';
+    const error = document.getElementById('error')
     // document.getElementById('spinner').style.display = 'block'
     const input = document.getElementById('search-field')
     const search = input.value
     // console.log(search)
-    const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${search}`
+
     // console.log(url)
-    fetch(url)
-        .then(res => res.json())
-        .then(data => showPlayers(data.player))
+    if (search == '') {
+        error.innerText = 'Write a name'
+    }
+    else {
+        const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${search}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => showPlayers(data.player))
+        error.innerText = '';
+    }
     // document.getElementById('spinner').style.display = 'none'
 
 }
