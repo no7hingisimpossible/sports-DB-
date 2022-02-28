@@ -15,8 +15,15 @@ const loadAPI = () => {
         const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${search}`
         fetch(url)
             .then(res => res.json())
-            .then(data => showPlayers(data.player))
-        error.innerText = '';
+            .then(data => {
+                if (data.player == null) {
+                    error.innerText = 'Name not found';
+                }
+                else {
+                    showPlayers(data.player)
+                    error.innerText = '';
+                }
+            })
     }
     // document.getElementById('spinner').style.display = 'none'
 
